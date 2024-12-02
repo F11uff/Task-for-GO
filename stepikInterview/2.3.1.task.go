@@ -28,13 +28,10 @@ func main() {
 func generator(ctx context.Context, in ...int) <-chan int {
 	ch := make(chan int, len(in))
 
-	ctx, cancel := context.WithCancel(ctx)
-
 	go func() {
 		for _, val := range in {
 			select {
 			case <-ctx.Done():
-				cancel()
 				return
 			case ch <- val:
 			}
@@ -49,14 +46,11 @@ func generator(ctx context.Context, in ...int) <-chan int {
 func squarer(ctx context.Context, in <-chan int) <-chan int {
 	ch := make(chan int)
 
-	ctx, cancel := context.WithCancel(ctx)
-
 	go func() {
 		defer close(ch)
 		for val := range in {
 			select {
 			case <-ctx.Done():
-				cancel()
 				return
 			case ch <- val * val:
 			}
