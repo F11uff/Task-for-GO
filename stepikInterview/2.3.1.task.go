@@ -6,16 +6,15 @@ import (
 )
 
 /*
-Напишите функции generator и squarer.
+Write functions generator and squarer.
 
-Функция generator принимает на вход контекст и слайс целых чисел, элементы которого последовательно записываются в
-возвращаемый канал.
+The generator function takes as input a context and a slice of integers, the elements of which are sequentially written into
+return channel.
 
-Функция squarer принимает на вход контекст и канал целых чисел.
-Функция последовательно читает из канал числа,
-возводит их в квадрат и пишет в возвращаемый канал.
+The squarer function takes as input a context and an integer channel. The function sequentially reads numbers from the channel,
+squares them and writes to the returned channel.
 
-Обе функции должны уметь завершаться по отмене контекста.
+Both functions must be able to terminate when the context is canceled.
 */
 
 func main() {
