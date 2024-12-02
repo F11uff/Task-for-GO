@@ -7,18 +7,15 @@ import (
 )
 
 /*
-Необходимо написать worker pool: нужно выполнить параллельно numJobs заданий, используя numWorkers горутин,
-которые запущены единожды за время выполнения програмы.
-Для этого напишите функции worker и main.
-Функция worker:
-на вход получает функцию для выполнения f, канал для получения аргументов jobs и канал для записи результатов
-results
-читает из jobs и записывает результат выполнения f(job) в results.
-Функция main:
-запускает функцию worker в numWorkers горутинах;
-в качестве первого аргумента worker использует функцию multiplier;
-пишет числа от 1 до numJobs в канал jobs;
-читает и выводит полученные значения из канала results, паралелльно работе воркеров
+
+You need to write a worker pool: you need to execute numJobs of jobs in parallel, using numWorkers goroutines,
+which are launched once during the execution of the program.
+To do this, write the worker and main functions.
+The worker function: receives as input a function for executing f, a channel for receiving arguments jobs and a channel
+for writing results reads from jobs and writes the result of executing f(job) to results.
+Main function: runs the worker function in numWorkers goroutines;
+the worker uses the multiplier function as the first argument; writes numbers from 1 to numJobs to the jobs channel;
+reads and displays the received values from the results channel, in parallel with the work of workers
 */
 
 const (
