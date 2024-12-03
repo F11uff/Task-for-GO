@@ -17,11 +17,11 @@ type searh func() *result
 type replicas []searh
 
 /*
-Напишите функцию getFirstResult, которая принимает контекст и запускает конкурентый поиск, возвращая первый
-доступный результат из replicas. Возвращать ошибку контекста, если контекст завершился раньше, чем стал доступен
-какой-то результат из реплики.
-Напишите функцию getResults, которая запускает конкурентный поиск для каждого набора реплик из replicaKinds,
-использую getFirstResul`t, и возвращает результат для каждого набора реплик.
+Write a getFirstResult function that takes a context and runs a concurrent search, returning the first
+available result from replicas. Return a context error if the context ends before any
+result from a replica becomes available.
+Write a getResults function that runs a concurrent search for each replica set in replicaKinds,
+using getFirstResul`t, and returns a result for each replica set.
 */
 
 func main() {

@@ -1,12 +1,12 @@
 package main
 
 /*
-Есть функция executeTask , которая во время исполнения может зависнуть на неопределенно долгое время.
-Реализуйте функцию-обертку executeTaskWithTimeout, которая:
-исполняет executeTask
-принимает аргументом контекст
-завершается либо в результате исполнения executeTask, либо в результате отмены контекста. В последнем случае
-вернуть ошибку контекста.
+There is a function executeTask that can hang for an indefinite period of time during execution.
+Implement a wrapper function executeTaskWithTimeout that:
+executes executeTask
+takes a context as an argument
+terminates either as a result of executing executeTask or as a result of canceling the context. In the latter case,
+return a context error.
 */
 
 import (
