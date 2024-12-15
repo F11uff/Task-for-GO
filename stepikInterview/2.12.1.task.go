@@ -5,6 +5,11 @@ import (
 	"sync"
 )
 
+/*
+Write a Run function that starts concurrent execution of fs functions and waits for them to finish. If one or
+several fs functions failed, Run returns any of them.
+*/
+
 type fn func() error
 
 func main() {

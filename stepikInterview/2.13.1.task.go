@@ -5,20 +5,25 @@ import (
 	"reflect"
 )
 
+/*
+Implement the methods of the ringBuffer structure so that main runs without panicking
+*/
+
 type ringBuffer struct {
 	c chan int
 }
 
 func newRingBuffer(size int) *ringBuffer {
-	ch := make(chan int, size)
-	return &ringBuffer{ch}
+	return &ringBuffer{
+		make(chan int, size),
+	}
 }
 
 func (b *ringBuffer) write(v int) {
 	select {
 	case b.c <- v:
 	default:
-		<-b.c //Считать с канала, чтобы перезаписать другое число (буфер канал
+		<-b.c //Считать с канала, чтобы перезаписать другое число (буфер канала
 		// не дает возможности переписать значения в кольцевой очери канала, из-за sendx)
 		b.write(v)
 	}

@@ -1,5 +1,11 @@
 package main
 
+/*
+Write a function inc that takes a channel as input, reads values from it and writes these values, incremented
+by one, into the return channel.
+Enhance the main function by creating a chain of channels using inc so that the program exits without panicking.
+*/
+
 func main() {
 	first := make(chan int)
 	last := make(<-chan int)
