@@ -1,5 +1,12 @@
 package main
 
+import (
+	"context"
+	"fmt"
+	"sync"
+	"time"
+)
+
 /*
 Write the functions produce and main.
 
@@ -26,9 +33,41 @@ const (
 	produceStop  = 10
 )
 
-func produce(pipe chan<- int) { // допускается добавить доп. аргументы
-	// напишите свой код здесь
+func produce(ctx context.Context, wg *sync.WaitGroup, pipe chan<- int) { // допускается добавить доп. аргументы
+	defer wg.Done()
+	defer func() {
+		time.Sleep(3 * time.Second)
+		fmt.Println("produce finished")
+	}()
+
+	for i := 0; ; i++ {
+		select {
+		case <-ctx.Done():
+			return
+		case pipe <- i:
+		}
+	}
 }
 func main() {
-	// напишите свой код здесь
+	ctx, cancel := context.WithCancel(context.Background())
+	wg := sync.WaitGroup{}
+
+	pipeCh := make(chan int)
+	for i := 0; i < produceCount; i++ {
+		wg.Add(1)
+		go produce(ctx, &wg, pipeCh)
+	}
+
+	for i := range pipeCh {
+		fmt.Println(i)
+
+		if i == produceStop {
+			cancel()
+			break
+		}
+	}
+
+	wg.Wait()
+	fmt.Println("main finished")
+	close(pipeCh)
 }
