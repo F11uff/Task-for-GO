@@ -13,7 +13,6 @@ import "fmt"
 
 func main() {
 	ch1 := make(chan int)
-	//ch2 := make(chan int)
 
 	go func() {
 		defer close(ch1)
@@ -30,7 +29,6 @@ func main() {
 }
 
 func example(ch1 <-chan int, batchSize int) chan []int {
-
 	chResult := make(chan []int)
 
 	go func() {
