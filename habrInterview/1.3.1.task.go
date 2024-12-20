@@ -22,13 +22,13 @@ func main() {
 		ch1 <- 44
 	}()
 
-	for i := range example(ch1, 2) {
+	for i := range example(ch1, 3) {
 		fmt.Println(i)
 	}
 
 }
 
-func example(ch1 <-chan int, batchSize int) chan []int {
+func example(ch1 <-chan int, batchSize int) <-chan []int {
 	chResult := make(chan []int)
 
 	go func() {
